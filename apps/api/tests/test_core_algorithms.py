@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from src.services.dag.engine import DAGEngine
 from src.services.retrieval.rrf import reciprocal_rank_fusion
 from src.services.research.freshness import FreshnessGatingClassifier
+from src.services.grounding.calibrator import ConfidenceCalibrator
 
 
 class TestCoreAlgorithms(unittest.TestCase):
@@ -61,6 +62,13 @@ class TestCoreAlgorithms(unittest.TestCase):
             "Explain dot product attention", [{"reranker_score": 0.9}]
         )
         self.assertFalse(should_web2)
+
+    def test_confidence_calibration(self):
+        calibrator = ConfidenceCalibrator()
+        chunks = [{"id": "c1", "reranker_score": 1.0, "authority_level": 1}]
+        res = calibrator.calculate_confidence(chunks, supported_claims_ratio=1.0)
+        self.assertEqual(res.composite_confidence, 1.0)
+        self.assertEqual(res.badge, "HIGHLY VERIFIED")
 
 
 if __name__ == "__main__":

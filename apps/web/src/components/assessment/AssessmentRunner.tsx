@@ -103,7 +103,7 @@ export const AssessmentRunner: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 font-bold text-xs uppercase font-mono tracking-wider transition-all shadow-lg shadow-sky-500/20"
+            className="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-sky-950 font-bold text-xs uppercase font-mono tracking-wider transition-all shadow-lg shadow-sky-500/20"
           >
             {loading ? "Evaluating Deterministic Rubric..." : "Submit for Evaluation"}
           </button>

@@ -1,5 +1,18 @@
 from typing import List, Dict, Any, Tuple
-from src.schemas.retrieval import ConfidenceBreakdown
+
+try:
+    from src.schemas.retrieval import ConfidenceBreakdown
+except ImportError:
+    from dataclasses import dataclass
+
+    @dataclass
+    class ConfidenceBreakdown:
+        composite_confidence: float
+        retrieval_relevance: float
+        source_authority: float
+        claim_support: float
+        staleness_penalty: float
+        badge: str
 
 
 class ConfidenceCalibrator:

@@ -179,7 +179,7 @@ export const GroundedChat: React.FC = () => {
         <button
           type="submit"
           disabled={loading || !input.trim()}
-          className="px-4 py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 font-semibold flex items-center gap-2 transition-all shadow-lg shadow-sky-500/20"
+          className="px-4 py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-sky-950 font-semibold flex items-center gap-2 transition-all shadow-lg shadow-sky-500/20"
         >
           <Send className="w-4 h-4" />
           <span className="hidden sm:inline text-xs font-bold uppercase font-mono">

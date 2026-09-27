@@ -1,21 +1,26 @@
+import unittest
+import sys
+import os
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from src.services.retrieval.rrf import reciprocal_rank_fusion
 
 
-def test_rrf_scoring_and_ranking():
-    # Dense results: doc1 (rank 1), doc2 (rank 2)
-    dense = [{"id": "doc1", "content": "dense top"}, {"id": "doc2", "content": "dense second"}]
-    # Sparse results: doc2 (rank 1), doc3 (rank 2)
-    sparse = [{"id": "doc2", "content": "sparse top"}, {"id": "doc3", "content": "sparse second"}]
+class TestRRF(unittest.TestCase):
 
-    fused = reciprocal_rank_fusion([dense, sparse], k=60, top_n=3)
+    def test_rrf_scoring_and_ranking(self):
+        dense = [{"id": "doc1", "content": "dense top"}, {"id": "doc2", "content": "dense second"}]
+        sparse = [{"id": "doc2", "content": "sparse top"}, {"id": "doc3", "content": "sparse second"}]
 
-    # For k=60:
-    # doc1: 1/(60+1) = 1/61 = 0.016393
-    # doc2: 1/(60+2) + 1/(60+1) = 1/62 + 1/61 = 0.016129 + 0.016393 = 0.032522
-    # doc3: 1/(60+2) = 1/62 = 0.016129
-    # Expected ranking: doc2 > doc1 > doc3
-    assert len(fused) == 3
-    assert fused[0]["id"] == "doc2"
-    assert fused[1]["id"] == "doc1"
-    assert fused[2]["id"] == "doc3"
-    assert fused[0]["rrf_score"] > fused[1]["rrf_score"]
+        fused = reciprocal_rank_fusion([dense, sparse], k=60, top_n=3)
+
+        self.assertEqual(len(fused), 3)
+        self.assertEqual(fused[0]["id"], "doc2")
+        self.assertEqual(fused[1]["id"], "doc1")
+        self.assertEqual(fused[2]["id"], "doc3")
+        self.assertGreater(fused[0]["rrf_score"], fused[1]["rrf_score"])
+
+
+if __name__ == "__main__":
+    unittest.main()

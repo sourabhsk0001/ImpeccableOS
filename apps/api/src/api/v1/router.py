@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from src.api.v1.endpoints import (
     health,
+    auth,
     dag,
     roadmap,
     retrieval,
@@ -12,6 +13,7 @@ from src.api.v1.endpoints import (
 api_router = APIRouter()
 
 api_router.include_router(health.router, prefix="", tags=["System"])
+api_router.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 api_router.include_router(dag.router, prefix="/dag", tags=["Skill Graph"])
 api_router.include_router(roadmap.router, prefix="/roadmap", tags=["Roadmap"])
 api_router.include_router(retrieval.router, prefix="/retrieval", tags=["Retrieval"])

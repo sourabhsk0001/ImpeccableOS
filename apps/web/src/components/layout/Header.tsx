@@ -1,7 +1,44 @@
-import React from "react";
-import { Sparkles, Terminal, Activity, ShieldCheck } from "lucide-react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { Terminal, Activity, ShieldCheck, UserCheck, LogIn, LogOut } from "lucide-react";
+import { AuthModal } from "../auth/AuthModal";
 
 export const Header: React.FC = () => {
+  const [authOpen, setAuthOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<{
+    email: string;
+    full_name?: string;
+    target_career_path?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem("impeccable_user");
+      if (stored) {
+        try {
+          setCurrentUser(JSON.parse(stored));
+        } catch {
+          // ignore corrupted local storage
+        }
+      } else {
+        setCurrentUser({
+          email: "sourabhsk0001@github",
+          full_name: "Lead AI Engineer",
+          target_career_path: "Agentic AI Systems Engineer",
+        });
+      }
+    }
+  }, []);
+
+  const handleLogout = () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("impeccable_token");
+      localStorage.removeItem("impeccable_user");
+    }
+    setCurrentUser(null);
+  };
+
   return (
     <header className="w-full glass-panel border-b border-surfaceBorder px-6 py-4 flex items-center justify-between sticky top-0 z-50">
       <div className="flex items-center gap-3">
@@ -18,7 +55,7 @@ export const Header: React.FC = () => {
             </span>
           </div>
           <p className="text-xs text-slate-400">
-            Adaptive AI Engineering Trainer & Execution Engine
+            Adaptive AI Engineering Trainer &amp; Execution Engine
           </p>
         </div>
       </div>
@@ -37,16 +74,47 @@ export const Header: React.FC = () => {
           <span className="text-sky-400 font-semibold">Online</span>
         </div>
 
-        <div className="flex items-center gap-3 pl-2 border-l border-slate-800">
-          <div className="text-right hidden sm:block">
-            <div className="text-xs font-semibold text-slate-200">Lead AI Engineer</div>
-            <div className="text-[11px] text-slate-400 font-mono">sourabhsk0001@github</div>
+        {currentUser ? (
+          <div className="flex items-center gap-3 pl-2 border-l border-slate-800">
+            <div className="text-right hidden sm:block">
+              <div className="text-xs font-semibold text-slate-200">
+                {currentUser.full_name || "AI Engineer"}
+              </div>
+              <div className="text-[11px] text-slate-400 font-mono">
+                {currentUser.email}
+              </div>
+            </div>
+            <button
+              onClick={() => setAuthOpen(true)}
+              title="Switch account"
+              className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white text-xs hover:ring-2 hover:ring-sky-400 transition-all"
+            >
+              {currentUser.full_name ? currentUser.full_name[0].toUpperCase() : "S"}
+            </button>
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              className="p-1.5 rounded text-slate-400 hover:text-rose-400 hover:bg-slate-800/60 transition-colors"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white text-xs">
-            S
-          </div>
-        </div>
+        ) : (
+          <button
+            onClick={() => setAuthOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/40 hover:bg-sky-500/30 text-xs font-mono font-medium transition-all"
+          >
+            <LogIn className="w-3.5 h-3.5" />
+            <span>Authenticate</span>
+          </button>
+        )}
       </div>
+
+      <AuthModal
+        isOpen={authOpen}
+        onClose={() => setAuthOpen(false)}
+        onSuccess={(u) => setCurrentUser(u)}
+      />
     </header>
   );
 };

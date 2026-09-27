@@ -212,7 +212,7 @@ export const DagVisualizer: React.FC = () => {
           <div className="pt-4 border-t border-slate-800 text-right">
             <button
               onClick={() => alert(`Launching assessment module for ${selectedNode?.label}`)}
-              className="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs uppercase font-mono tracking-wider transition-all"
+              className="w-full py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-sky-950 font-bold text-xs uppercase font-mono tracking-wider transition-all"
             >
               Launch Practical Assessment
             </button>
