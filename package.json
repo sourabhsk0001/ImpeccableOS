@@ -1,0 +1,30 @@
+{
+  "name": "impeccable-os-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Adaptive AI Engineering Trainer & Execution Engine",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "docker compose up",
+    "dev:local": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "cd apps/api && uvicorn src.main:app --reload --port 8000",
+    "build": "npm run build --workspace=apps/web",
+    "lint": "npm run lint --workspace=apps/web",
+    "test": "npm run test:api",
+    "test:api": "cd apps/api && pytest -v",
+    "seed": "cd apps/api && python scripts/seed_database.py"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "author": "Sourabh <sourabhsk0007@gmail.com>",
+  "license": "MIT"
+}
