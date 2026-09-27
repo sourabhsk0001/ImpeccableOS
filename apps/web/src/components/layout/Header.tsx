@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
         <div className="flex items-center gap-3 pl-2 border-l border-slate-800">
           <div className="text-right hidden sm:block">
             <div className="text-xs font-semibold text-slate-200">Lead AI Engineer</div>
-            <div className="text-[11px] text-slate-400 font-mono">sourabhsk0007@github</div>
+            <div className="text-[11px] text-slate-400 font-mono">sourabhsk0001@github</div>
           </div>
           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white text-xs">
             S

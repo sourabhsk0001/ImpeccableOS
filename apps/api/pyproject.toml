@@ -9,7 +9,7 @@ description = "FastAPI Intelligence Layer for ImpeccableOS Adaptive AI Engineeri
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
-    { name = "Sourabh", email = "sourabhsk0007@gmail.com" }
+    { name = "Sourabh", email = "sourabhsk0001@gmail.com" }
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

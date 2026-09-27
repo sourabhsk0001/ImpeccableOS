@@ -28,7 +28,7 @@ async def grounded_chat(req: GroundedChatRequest):
             "content": "RRF merges dense cosine vector search with sparse tsvector text ranking using constant k=60 to reward documents consistently ranked high across both paradigms.",
             "authority_level": 1,
             "reranker_score": 0.94,
-            "source_url": "https://github.com/sourabhsk0007/ImpeccableOS/blob/main/docs/adr/0003-hybrid-retrieval-rrf-cross-encoder.md"
+            "source_url": "https://github.com/sourabhsk0001/ImpeccableOS/blob/main/docs/adr/0003-hybrid-retrieval-rrf-cross-encoder.md"
         }
     ]
 

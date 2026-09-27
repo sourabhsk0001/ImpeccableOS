@@ -52,7 +52,7 @@ async def seed():
             content="Reciprocal Rank Fusion (RRF) with constant k=60 robustly fuses dense cosine embeddings with sparse BM25 text search.",
             authority_level=1,
             is_evolving_topic=False,
-            source_url="https://github.com/sourabhsk0007/ImpeccableOS"
+            source_url="https://github.com/sourabhsk0001/ImpeccableOS"
         )
         await session.merge(sample_doc)
         await session.commit()

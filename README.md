@@ -244,7 +244,7 @@ ImpeccableOS/
 ### Option 1: One-Click Launch via Docker Compose (Recommended)
 ```bash
 # 1. Clone repository
-git clone https://github.com/sourabhsk0007/ImpeccableOS.git
+git clone https://github.com/sourabhsk0001/ImpeccableOS.git
 cd ImpeccableOS
 
 # 2. Configure environment
